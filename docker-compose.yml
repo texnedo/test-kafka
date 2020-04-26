@@ -1,0 +1,27 @@
+version: '3'
+services:
+#  zookeeper:
+#    image: 'bitnami/zookeeper:latest'
+#    networks:
+#      - test-kafka-net
+#
+#  kafka-1:
+#    image: 'bitnami/kafka:latest'
+#    networks:
+#      - test-kafka-net
+#
+#  kafka-2:
+#    image: 'bitnami/kafka:latest'
+#    networks:
+#      - test-kafka-net
+
+  kafka-producer:
+    build: .
+    environment:
+      - KAFKA_HOST=kafka-1:29092
+    networks:
+      - test-kafka-net
+
+networks:
+  test-kafka-net:
+    driver: bridge
