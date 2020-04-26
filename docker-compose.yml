@@ -1,19 +1,19 @@
 version: '3'
 services:
-#  zookeeper:
-#    image: 'bitnami/zookeeper:latest'
-#    networks:
-#      - test-kafka-net
-#
-#  kafka-1:
-#    image: 'bitnami/kafka:latest'
-#    networks:
-#      - test-kafka-net
-#
-#  kafka-2:
-#    image: 'bitnami/kafka:latest'
-#    networks:
-#      - test-kafka-net
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    networks:
+      - test-kafka-net
+
+  kafka-1:
+    image: 'bitnami/kafka:latest'
+    networks:
+      - test-kafka-net
+
+  kafka-2:
+    image: 'bitnami/kafka:latest'
+    networks:
+      - test-kafka-net
 
   kafka-producer:
     build: .
