@@ -1,16 +1,19 @@
+import os
 import sys
 
 from kafka import KafkaConsumer
 from json import loads
 
 
-def main(connection: str):
+def main(connection: str, topic: str):
     if connection is None or len(connection) == 0:
         connection = 'localhost:29092'
-    print("Consumer started with {}".format(connection))
+    if topic is None or len(topic) == 0:
+        topic = 'test-topic-some'
+    print("Consumer started with {} for topic {}".format(connection, topic))
     consumer = KafkaConsumer(
-        'test-topic-some',
-        bootstrap_servers=['localhost:29092'],
+        topic,
+        bootstrap_servers=[connection],
         auto_offset_reset='earliest',
         enable_auto_commit=True,
         group_id='my-group-new',
@@ -40,4 +43,5 @@ def safe_deserialize_key(data: bytearray):
 
 
 if __name__ == '__main__':
-    main(sys.argv[0])
+    main(os.environ['KAFKA_HOST'] if 'KAFKA_HOST' in os.environ else "",
+         os.environ['KAFKA_TOPIC'] if 'KAFKA_TOPIC' in os.environ else "")
